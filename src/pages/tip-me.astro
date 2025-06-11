@@ -1,0 +1,13 @@
+---
+import { STRIPE_PRICING_ID } from "astro:env/server";
+import { STRIPE_SECRET_KEY } from "astro:env/server";
+import Stripe from "stripe";
+
+const stripe = new Stripe(STRIPE_SECRET_KEY);
+const session = await stripe.checkout.sessions.create({
+  mode: "payment",
+  line_items: [{ price: STRIPE_PRICING_ID, quantity: 1 }],
+  success_url: new URL("/thank-you", Astro.url).toString(),
+});
+return Astro.redirect(session.url);
+---

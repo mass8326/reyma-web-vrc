@@ -1,7 +1,64 @@
 ---
+import { Image } from "astro:assets";
 import Root from "../layouts/root.astro";
+import Button from "./_button.astro";
+import avatar from "../images/avatar.webp";
+
+export const prerender = true;
 ---
 
 <Root>
-  Hello world!
+  <div
+    class="flex flex-col items-center justify-center gap-4 p-4 sm:(gap-6 p-8)"
+  >
+    <Image
+      class="rounded-3xl"
+      src={avatar}
+      alt="Maserooni's VRChat Avatar"
+      width="256"
+      height="256"
+      densities={[1, 1.5, 2]}
+    />
+    <h1 class="text-4xl font-bold">
+      Maserooni's
+      <span class="inline-block">VRChat Assets</span>
+    </h1>
+    <ul>
+      <article class="b-(1 gray-400) p-4 rounded space-y-4 bg-white">
+        <div class="space-y-2">
+          <h2 class="text-2xl font-medium">
+            Novabeast - FPV Snoot & Global Collider
+          </h2>
+          <ul
+            class="ml-8 list-disc [&_a]:(underline text-blue-600 visited:text-violet-600)"
+          >
+            <li>
+              Judge where your snoot is by adding ghostly nostrils to your view
+            </li>
+            <li>
+              Adjust the color via radial menu to adapt to various lighting
+              conditions
+            </li>
+            <li>
+              Use your snoot to nuzzle others' physbones via global collider
+            </li>
+            <li>
+              Install the prefab easily for
+              <a href="https://jinxxy.com/kittomatic/novabeast"
+                >Kittomatic's Novabeast</a
+              >
+              using
+              <a href="https://vrcfury.com/">VRCFury</a>
+            </li>
+          </ul>
+        </div>
+        <div class="space-x-1">
+          <Button class="!bg-gray-700 cursor-not-allowed" href="#"
+            >Download (Coming Soon)</Button
+          >
+          <Button href="/tip-me" target="_blank">Leave Me A Tip &lt;3</Button>
+        </div>
+      </article>
+    </ul>
+  </div>
 </Root>
