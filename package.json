@@ -1,0 +1,36 @@
+{
+  "name": "anniversary-website",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "infisical scan git-changes && node ./scripts/check-licenses.cjs",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@infisical/cli": "^0.41.85",
+    "@typescript-eslint/parser": "^8.34.0",
+    "astro": "^5.9.2",
+    "eslint": "^9.28.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-astro": "^1.3.1",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.4.1",
+    "globify-gitignore": "^1.0.3",
+    "husky": "^9.1.7",
+    "license-checker": "^25.0.1",
+    "lint-staged": "^16.1.0",
+    "prettier": "^3.5.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "typescript-eslint": "^8.34.0"
+  },
+  "packageManager": "pnpm@10.12.1+sha512.f0dda8580f0ee9481c5c79a1d927b9164f2c478e90992ad268bbb2465a736984391d6333d2c327913578b2804af33474ca554ba29c04a8b13060a717675ae3ac",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@infisical/cli"
+    ]
+  }
+}

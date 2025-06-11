@@ -1,0 +1,10 @@
+{
+  "eslint.format.enable": true,
+  "eslint.rules.customizations": [
+    { "rule": "prettier/prettier", "severity": "off" },
+    { "rule": "import/order", "severity": "off" }
+  ],
+  "eslint.useFlatConfig": true,
+  "npm.packageManager": "pnpm",
+  "prettier.ignorePath": ".gitignore"
+}
