@@ -1,8 +1,8 @@
 ---
 import { Image } from "astro:assets";
+import avatar from "../images/avatar.webp";
 import Root from "../layouts/root.astro";
 import Button from "./_button.astro";
-import avatar from "../images/avatar.webp";
 
 export const prerender = true;
 ---
@@ -53,10 +53,10 @@ export const prerender = true;
           </ul>
         </div>
         <div class="space-x-1">
-          <Button class="!bg-gray-700 cursor-not-allowed" href="#"
-            >Download (Coming Soon)</Button
-          >
-          <Button href="/tip-me" target="_blank">Leave Me A Tip &lt;3</Button>
+          <Button disabled>Download (Coming Soon)</Button>
+          <form class="inline" method="POST" action="/tip-me" target="_blank">
+            <Button>Leave Me A Tip &lt;3</Button>
+          </form>
         </div>
       </article>
     </ul>

@@ -1,16 +1,21 @@
 ---
-import type { HTMLAttributes } from "astro/types";
+import type { HTMLAttributes, HTMLTag } from "astro/types";
 import { clsx } from "clsx";
 
-type Props = HTMLAttributes<"a">;
+type Props<T extends HTMLTag | undefined> = T extends HTMLTag
+  ? HTMLAttributes<T> & { tag: T }
+  : HTMLAttributes<"button">;
+
+const { tag: Tag = "button", ...props } = Astro.props;
 ---
 
-<a
+<Tag
+  {...props}
   class={clsx(
     "py-2 px-4 inline-flex items-center gap-1 bg-blue-500 rounded text-white font-medium",
-    Astro.props.class,
+    "disabled:(bg-gray-700 cursor-not-allowed)",
+    props.class,
   )}
-  {...Astro.props}
 >
   <slot />
-</a>
+</Tag>

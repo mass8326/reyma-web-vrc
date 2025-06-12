@@ -2,12 +2,19 @@
 import { STRIPE_PRICING_ID } from "astro:env/server";
 import { STRIPE_SECRET_KEY } from "astro:env/server";
 import Stripe from "stripe";
+import Button from "./_button.astro";
 
-const stripe = new Stripe(STRIPE_SECRET_KEY);
-const session = await stripe.checkout.sessions.create({
-  mode: "payment",
-  line_items: [{ price: STRIPE_PRICING_ID, quantity: 1 }],
-  success_url: new URL("/thank-you", Astro.url).toString(),
-});
-return Astro.redirect(session.url);
+if (Astro.request.method === "POST") {
+  const stripe = new Stripe(STRIPE_SECRET_KEY);
+  const session = await stripe.checkout.sessions.create({
+    mode: "payment",
+    line_items: [{ price: STRIPE_PRICING_ID, quantity: 1 }],
+    success_url: new URL("/thank-you", Astro.url).toString(),
+  });
+  return Astro.redirect(session.url);
+}
 ---
+
+<form method="POST" action="/tip-me" target="_blank">
+  <Button>Leave Me A Tip &lt;3</Button>
+</form>
