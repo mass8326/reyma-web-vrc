@@ -3,9 +3,10 @@ import { defineConfig, envField } from "astro/config";
 import icon from "astro-icon";
 import { presetWind4 } from "unocss";
 import uno from "unocss/astro";
+import arraybuffer from "vite-plugin-arraybuffer";
 
 export default defineConfig({
-  output: "static",
+  output: "server",
   adapter: vercel(),
   integrations: [
     uno({
@@ -14,11 +15,18 @@ export default defineConfig({
     }),
     icon(),
   ],
+  vite: {
+    plugins: [arraybuffer()],
+  },
   env: {
     schema: {
       PUBLIC_STRIPE_KEY: envField.string({
         context: "client",
         access: "public",
+      }),
+      DATABASE_URL: envField.string({
+        context: "server",
+        access: "secret",
       }),
       STRIPE_SECRET_KEY: envField.string({
         context: "server",

@@ -1,8 +1,10 @@
 ---
 import { Image } from "astro:assets";
-import avatar from "../images/avatar.webp";
+import avatar from "../assets/avatar.webp";
 import Root from "../layouts/root.astro";
 import Button from "./_button.astro";
+
+export const prerender = true;
 ---
 
 <Root>
@@ -59,7 +61,9 @@ import Button from "./_button.astro";
           </ul>
         </div>
         <div class="flex flex-wrap gap-2">
-          <Button disabled>Download (Coming Soon)</Button>
+          <form class="inline" method="POST" action="/dl/fpvs.unitypackage">
+            <Button>Download (Free)</Button>
+          </form>
           <Button tag="a" href="/tip-me">Leave Me A Tip &lt;3</Button>
         </div>
       </article>

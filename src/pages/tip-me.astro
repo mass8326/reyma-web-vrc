@@ -1,6 +1,8 @@
 ---
 import Root from "../layouts/root.astro";
 import Button from "./_button.astro";
+
+export const prerender = true;
 ---
 
 <Root>
@@ -15,8 +17,8 @@ import Button from "./_button.astro";
 
   <script>
     import { loadStripe } from "@stripe/stripe-js";
-    import { PUBLIC_STRIPE_KEY } from "astro:env/client";
     import { actions } from "astro:actions";
+    import { PUBLIC_STRIPE_KEY } from "astro:env/client";
 
     void main();
 

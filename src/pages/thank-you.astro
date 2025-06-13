@@ -3,8 +3,6 @@ import Root from "../layouts/root.astro";
 import { stripe } from "../lib/stripe";
 import Button from "./_button.astro";
 
-export const prerender = false;
-
 const id = Astro.url.searchParams.get("session_id");
 const session = id ? await stripe.checkout.sessions.retrieve(id) : undefined;
 const complete = session?.status === "complete";
@@ -13,7 +11,7 @@ const complete = session?.status === "complete";
 <Root>
   <div class="w-full max-w-md mx-auto p-4 space-y-4">
     <Button tag="a" href="/">Go Back</Button>
-    <div class="p-4 bg-white rounded-3xl space-y-2">
+    <div class="p-4 bg-white rounded-3xl space-y-4">
       <h1 class="text-3xl font-bold text-center">Thank You!</h1>
       <p>
         I've always dreamed of being able to sustain myself with my own work,

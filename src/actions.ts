@@ -1,7 +1,7 @@
-import { defineAction } from "astro:actions";
-import { stripe } from "./lib/stripe";
-import { STRIPE_PRICING_ID } from "astro:env/server";
 import assert from "node:assert";
+import { defineAction } from "astro:actions";
+import { STRIPE_PRICING_ID } from "astro:env/server";
+import { stripe } from "./lib/stripe";
 
 export const server = {
   createCheckoutSession: defineAction({
