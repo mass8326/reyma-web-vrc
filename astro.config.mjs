@@ -5,7 +5,7 @@ import { presetWind4 } from "unocss";
 import uno from "unocss/astro";
 
 export default defineConfig({
-  output: "server",
+  output: "static",
   adapter: vercel(),
   integrations: [
     uno({

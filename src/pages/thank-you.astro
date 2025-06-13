@@ -1,0 +1,55 @@
+---
+import Root from "../layouts/root.astro";
+import { stripe } from "../lib/stripe";
+import Button from "./_button.astro";
+
+export const prerender = false;
+
+const id = Astro.url.searchParams.get("session_id");
+const session = id ? await stripe.checkout.sessions.retrieve(id) : undefined;
+const complete = session?.status === "complete";
+---
+
+<Root>
+  <div class="w-full max-w-md mx-auto p-4 space-y-4">
+    <Button tag="a" href="/">Go Back</Button>
+    <div class="p-4 bg-white rounded-3xl space-y-2">
+      <h1 class="text-3xl font-bold text-center">Thank You!</h1>
+      <p>
+        I've always dreamed of being able to sustain myself with my own work,
+        and your tip is helping me take a step in that direction! All proceeds
+        will be used for creating new or improving currents assets for VRChat.
+      </p>
+      {
+        complete && (
+          <p>
+            If you'd like to reach out to me on Discord for any help with my
+            assets, you can usually find me hanging out with
+            {/* prettier-ignore */}
+            <a class="sc-link" href="https://discord.gg/UXWdyJAYeG">the community of people</a>
+            I call my friends.
+          </p>
+        )
+      }
+    </div>
+  </div>
+</Root>
+
+<script>
+  import confetti from "canvas-confetti";
+
+  function fire(particleRatio: number, opts: confetti.Options) {
+    confetti({
+      ...opts,
+      origin: { y: 0 },
+      angle: -90,
+      particleCount: Math.floor(100 * particleRatio),
+    });
+  }
+
+  fire(0.4, { spread: 26, startVelocity: 55 });
+  fire(0.2, { spread: 60 });
+  fire(0.6, { spread: 100, decay: 0.91, scalar: 0.8 });
+  fire(0.2, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+  fire(0.2, { spread: 120, startVelocity: 45 });
+</script>

@@ -3,8 +3,6 @@ import { Image } from "astro:assets";
 import avatar from "../images/avatar.webp";
 import Root from "../layouts/root.astro";
 import Button from "./_button.astro";
-
-export const prerender = true;
 ---
 
 <Root>
@@ -12,19 +10,27 @@ export const prerender = true;
     class="flex flex-col items-center justify-center gap-4 p-4 sm:(gap-6 p-8)"
   >
     <Image
-      class="rounded-3xl"
+      class="rounded-3xl lt-sm:hidden"
       src={avatar}
       alt="Maserooni's VRChat Avatar"
       width="256"
       height="256"
       densities={[1, 1.5, 2]}
     />
-    <h1 class="text-4xl font-bold">
+    <Image
+      class="rounded-3xl sm:hidden"
+      src={avatar}
+      alt="Maserooni's VRChat Avatar"
+      width="128"
+      height="128"
+      densities={[1, 1.5, 2]}
+    />
+    <h1 class="text-(4xl center) font-bold">
       Maserooni's
       <span class="inline-block">VRChat Assets</span>
     </h1>
     <ul>
-      <article class="b-(1 gray-400) p-4 rounded space-y-4 bg-white">
+      <article class="b-(1 gray-400) p-4 rounded-xl space-y-4 bg-white">
         <div class="space-y-2">
           <h2 class="text-2xl font-medium">
             Novabeast - FPV Snoot & Global Collider
@@ -52,11 +58,9 @@ export const prerender = true;
             </li>
           </ul>
         </div>
-        <div class="space-x-1">
+        <div class="flex flex-wrap gap-2">
           <Button disabled>Download (Coming Soon)</Button>
-          <form class="inline" method="POST" action="/tip-me" target="_blank">
-            <Button>Leave Me A Tip &lt;3</Button>
-          </form>
+          <Button tag="a" href="/tip-me">Leave Me A Tip &lt;3</Button>
         </div>
       </article>
     </ul>

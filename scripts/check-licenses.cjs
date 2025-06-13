@@ -1,6 +1,6 @@
 const checker = require("license-checker");
 
-const whitelist = ["0BSD", "Apache-2.0", "MIT", "BSD-3-Clause"];
+const whitelist = ["0BSD", "Apache-2.0", "MIT", "BSD-3-Clause", "ISC"];
 
 checker.init(
   {
