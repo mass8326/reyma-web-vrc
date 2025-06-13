@@ -18,6 +18,7 @@ export const prerender = true;
       width="256"
       height="256"
       densities={[1, 1.5, 2]}
+      loading="eager"
     />
     <Image
       class="rounded-3xl sm:hidden"
@@ -26,47 +27,51 @@ export const prerender = true;
       width="128"
       height="128"
       densities={[1, 1.5, 2]}
+      loading="eager"
     />
     <h1 class="text-(4xl center) font-bold">
       Maserooni's
       <span class="inline-block">VRChat Assets</span>
     </h1>
     <ul>
-      <article class="b-(1 gray-400) p-4 rounded-xl space-y-4 bg-white">
-        <div class="space-y-2">
-          <h2 class="text-2xl font-medium">
-            Novabeast - FPV Snoot & Global Collider
-          </h2>
-          <ul
-            class="ml-8 list-disc [&_a]:(underline text-blue-600 visited:text-violet-600)"
-          >
-            <li>
-              Judge where your snoot is by adding ghostly nostrils to your view
-            </li>
-            <li>
-              Adjust the color via radial menu to adapt to various lighting
-              conditions
-            </li>
-            <li>
-              Use your snoot to nuzzle others' physbones via global collider
-            </li>
-            <li>
-              Install the prefab easily for
-              <a href="https://jinxxy.com/kittomatic/novabeast"
-                >Kittomatic's Novabeast</a
-              >
-              using
-              <a href="https://vrcfury.com/">VRCFury</a>
-            </li>
-          </ul>
-        </div>
-        <div class="flex flex-wrap gap-2">
-          <form class="inline" method="POST" action="/dl/fpvs.unitypackage">
-            <Button>Download (Free)</Button>
-          </form>
-          <Button tag="a" href="/tip-me">Leave Me A Tip &lt;3</Button>
-        </div>
-      </article>
+      <li>
+        <article class="b-(1 gray-400) p-4 rounded-xl space-y-4 bg-white">
+          <div class="space-y-2">
+            <h2 class="text-2xl font-medium">
+              Novabeast - FPV Snoot & Global Collider
+            </h2>
+            <ul
+              class="ml-8 list-disc [&_a]:(underline text-blue-600 visited:text-violet-600)"
+            >
+              <li>
+                Judge where your snoot is by adding ghostly nostrils to your
+                view
+              </li>
+              <li>
+                Adjust the color via radial menu to adapt to various lighting
+                conditions
+              </li>
+              <li>
+                Use your snoot to nuzzle others' physbones via global collider
+              </li>
+              <li>
+                Install the prefab easily for
+                <a href="https://jinxxy.com/kittomatic/novabeast"
+                  >Kittomatic's Novabeast</a
+                >
+                using
+                <a href="https://vrcfury.com/">VRCFury</a>
+              </li>
+            </ul>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <form class="inline" method="POST" action="/dl/fpvs.unitypackage">
+              <Button>Download (Free)</Button>
+            </form>
+            <Button tag="a" href="/tip-me">Leave Me A Tip &lt;3</Button>
+          </div>
+        </article>
+      </li>
     </ul>
   </div>
 </Root>
