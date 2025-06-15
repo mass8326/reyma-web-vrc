@@ -5,34 +5,75 @@ import Button from "./_button.astro";
 export const prerender = true;
 ---
 
+<script>
+  import { loadStripe } from "@stripe/stripe-js";
+  import { actions } from "astro:actions";
+  import { PUBLIC_STRIPE_KEY } from "astro:env/client";
+
+  void main();
+
+  async function main() {
+    const stripe = await loadStripe(PUBLIC_STRIPE_KEY);
+    const checkout = await stripe?.initEmbeddedCheckout({
+      async fetchClientSecret() {
+        const result = await actions.createCheckoutSession();
+        if (result.error) throw result.error;
+        return result.data.clientSecret;
+      },
+    });
+    document.querySelector("#spinner")?.remove();
+    checkout?.mount("#checkout");
+  }
+</script>
+
 <Root>
-  <div class="w-full max-w-md mx-auto p-4 space-y-4">
-    <Button tag="a" href="/">Go Back</Button>
+  <div
+    class="flex justify-center items-start lt-md:(flex-col justify-stretch items-center) gap-4 p-4 children:max-w-md"
+  >
+    <div class="grow-1 w-full space-y-4">
+      <Button tag="a" href="/">Go Back</Button>
+      <div
+        id="checkout"
+        class="p-4 bg-white rounded-3xl overflow-hidden min-h-2xl"
+      >
+      </div>
+    </div>
     <div
-      id="checkout"
-      class="p-4 bg-white rounded-3xl overflow-hidden min-h-2xl"
+      class="flex-1 px-8 py-4 md:mt-14 bg-white rounded-3xl space-y-2 [&_a]:sc-link"
     >
+      <h2>What is this website?</h2>
+      <p>
+        This is a custom built website made by me using
+        <a href="https://astro.build/">Astro</a>
+        on
+        <a href="https://vercel.com/">Vercel</a>.
+      </p>
+      <h2>Why not use Gumroad or Jinxxy?</h2>
+      <p>
+        <a href="https://gumroad.com/pricing">Third party marketplaces</a>
+        usually take a cut of every sale, including tips and donations.
+      </p>
+      <p>
+        Since my assets are free and every "sale" is from your kindness and
+        generosity, I wanted show my thanks by making sure your dollar goes as
+        far as it can by eliminating these marketplace fees.
+      </p>
+      <h2>Is this website secure?</h2>
+      <p>
+        Yes, this website is served through HTTPS and all communications are
+        secure.
+      </p>
+      <p>
+        All payment information is handled entirely through
+        <a href="https://stripe.com/">Stripe</a>, a payment processor trusted by
+        Google, Amazon, Spotify, BMW, Airbnb, and millions of other companies.
+      </p>
     </div>
   </div>
-
-  <script>
-    import { loadStripe } from "@stripe/stripe-js";
-    import { actions } from "astro:actions";
-    import { PUBLIC_STRIPE_KEY } from "astro:env/client";
-
-    void main();
-
-    async function main() {
-      const stripe = await loadStripe(PUBLIC_STRIPE_KEY);
-      const checkout = await stripe?.initEmbeddedCheckout({
-        async fetchClientSecret() {
-          const result = await actions.createCheckoutSession();
-          if (result.error) throw result.error;
-          return result.data.clientSecret;
-        },
-      });
-      document.querySelector("#spinner")?.remove();
-      checkout?.mount("#checkout");
-    }
-  </script>
 </Root>
+
+<style>
+  h2 {
+    --at-apply: text-2xl font-bold;
+  }
+</style>
