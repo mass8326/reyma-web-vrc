@@ -1,0 +1,72 @@
+---
+import "@splidejs/splide/css";
+
+import { Image } from "astro:assets";
+
+interface Props {
+  slug: string;
+  thumbnails: { src: ImageMetadata; alt: string }[];
+}
+
+const { slug, thumbnails } = Astro.props;
+---
+
+<script>
+  import * as splide from "@splidejs/splide";
+  window.Splide = splide.Splide;
+  declare global {
+    // eslint-disable-next-line no-var
+    var Splide: typeof splide.Splide;
+  }
+</script>
+
+<script define:vars={{ slug }}>
+  document.addEventListener("DOMContentLoaded", () => {
+    const splide = new Splide(`#${slug}-splide`, {
+      type: "loop",
+      perPage: 1,
+      autoWidth: true,
+      focus: "center",
+    }).mount();
+
+    splide.on("move", (target) => {
+      const slides = splide.Components.Slides.get();
+      for (const { index, slide } of slides) {
+        if (index === target) {
+          slide.style.opacity = "1";
+        } else {
+          slide.style.opacity = ".2";
+        }
+      }
+    });
+  });
+</script>
+
+<section id={`${slug}-splide`} class="splide bg-black rounded overflow-hidden">
+  <div class="splide__track">
+    <ul class="splide__list">
+      {
+        thumbnails.map(({ src, alt }) => (
+          <li class="splide__slide">
+            <Image
+              {src}
+              {alt}
+              width="360"
+              height="360"
+              densities={[1, 1.5, 2]}
+            />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .splide__slide {
+    --at-apply: opacity-20 transition-opacity max-w-full;
+  }
+  .splide__slide.is-active.is-visible {
+    --at-apply: opacity-100;
+  }
+</style>
