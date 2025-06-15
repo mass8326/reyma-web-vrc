@@ -1,6 +1,10 @@
 ---
+import "@splidejs/splide/css";
+
 import { Image } from "astro:assets";
 import avatar from "../assets/avatar.webp";
+import thumbnail1 from "../assets/fpvs_thumbnail1.png";
+import thumbnail2 from "../assets/fpvs_thumbnail2.png";
 import Root from "../layouts/root.astro";
 import Button from "./_button.astro";
 
@@ -33,9 +37,36 @@ export const prerender = true;
       Maserooni's
       <span class="inline-block">VRChat Assets</span>
     </h1>
-    <ul>
+    <ul class="max-w-xl">
       <li>
         <article class="b-(1 gray-400) p-4 rounded-xl space-y-4 bg-white">
+          <section
+            id="image-carousel"
+            class="splide bg-black rounded overflow-hidden"
+          >
+            <div class="splide__track">
+              <ul class="splide__list">
+                <li class="splide__slide">
+                  <Image
+                    src={thumbnail1}
+                    alt="Global Collider For Nuzzles"
+                    width="360"
+                    height="360"
+                    densities={[1, 1.5, 2]}
+                  />
+                </li>
+                <li class="splide__slide">
+                  <Image
+                    src={thumbnail2}
+                    alt="First Person Snoot (4 Tris)"
+                    width="360"
+                    height="360"
+                    densities={[1, 1.5, 2]}
+                  />
+                </li>
+              </ul>
+            </div>
+          </section>
           <div class="space-y-2">
             <h2 class="text-2xl font-medium">
               Novabeast - FPV Snoot & Global Collider
@@ -52,7 +83,10 @@ export const prerender = true;
                 conditions
               </li>
               <li>
-                Use your snoot to nuzzle others' physbones via global collider
+                Use your snoot to nuzzle others' physbones via
+                <a href="https://vrcfury.com/components/global-collider/"
+                  >global collider</a
+                >
               </li>
               <li>
                 Install the prefab easily for
@@ -61,6 +95,12 @@ export const prerender = true;
                 >
                 using
                 <a href="https://vrcfury.com/">VRCFury</a>
+              </li>
+              <li>
+                Pick between
+                <a href="https://github.com/lilxyzw/lilToon">lilToon shader</a>,
+                <a href="https://www.poiyomi.com/">Poiyomi shader</a>, or
+                collider only
               </li>
             </ul>
           </div>
@@ -75,3 +115,35 @@ export const prerender = true;
     </ul>
   </div>
 </Root>
+
+<script>
+  import Splide from "@splidejs/splide";
+
+  const splide = new Splide("#image-carousel", {
+    type: "loop",
+    perPage: 1,
+    autoWidth: true,
+    focus: "center",
+  }).mount();
+
+  splide.on("move", (target) => {
+    const slides = splide.Components.Slides.get();
+    console.log(target, slides);
+    for (const { index, slide } of slides) {
+      if (index === target) {
+        slide.style.opacity = "1";
+      } else {
+        slide.style.opacity = ".2";
+      }
+    }
+  });
+</script>
+
+<style>
+  .splide__slide {
+    --at-apply: opacity-20 transition-opacity max-w-full;
+  }
+  .splide__slide.is-active.is-visible {
+    --at-apply: opacity-100;
+  }
+</style>
