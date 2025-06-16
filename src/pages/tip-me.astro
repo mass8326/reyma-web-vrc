@@ -1,8 +1,13 @@
 ---
+import { render } from "astro:content";
 import Root from "../layouts/root.astro";
 import Button from "./_button.astro";
+import { getEntry } from "astro:content";
 
 export const prerender = true;
+
+const page = await getEntry("pages", "tip-me")!;
+const { Content } = await render(page);
 ---
 
 <script>
@@ -39,41 +44,9 @@ export const prerender = true;
       </div>
     </div>
     <div
-      class="flex-1 px-8 py-4 md:mt-14 bg-white rounded-3xl space-y-2 [&_a]:sc-link"
+      class="flex-1 px-8 py-4 md:mt-14 bg-white rounded-3xl space-y-2 richtext"
     >
-      <h2>What is this website?</h2>
-      <p>
-        This is a custom built website made by me using
-        <a href="https://astro.build/">Astro</a>
-        on
-        <a href="https://vercel.com/">Vercel</a>.
-      </p>
-      <h2>Why not use Gumroad or Jinxxy?</h2>
-      <p>
-        <a href="https://gumroad.com/pricing">Third party marketplaces</a>
-        usually take a cut of every sale, including tips and donations.
-      </p>
-      <p>
-        Since my assets are free and every "sale" is from your kindness and
-        generosity, I wanted show my thanks by making sure your dollar goes as
-        far as it can by eliminating these marketplace fees.
-      </p>
-      <h2>Is this website secure?</h2>
-      <p>
-        Yes, this website is served through HTTPS and all communications are
-        secure.
-      </p>
-      <p>
-        All payment information is handled entirely through
-        <a href="https://stripe.com/">Stripe</a>, a payment processor trusted by
-        Google, Amazon, Spotify, BMW, Airbnb, and millions of other companies.
-      </p>
+      <Content />
     </div>
   </div>
 </Root>
-
-<style>
-  h2 {
-    --at-apply: text-2xl font-bold;
-  }
-</style>

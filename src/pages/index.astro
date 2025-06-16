@@ -7,6 +7,8 @@ import thumbnail3 from "../assets/fpvs_thumbnail3.png";
 import Root from "../layouts/root.astro";
 import Button from "./_button.astro";
 import Splide from "../components/splide.astro";
+import { getEntry } from "astro:content";
+import { render } from "astro:content";
 
 export const prerender = true;
 
@@ -15,6 +17,9 @@ const thumbnails = [
   { src: thumbnail2, alt: "First Person Snoot (4 Tris)" },
   { src: thumbnail3, alt: "Drag + Drop Install" },
 ];
+
+const page = await getEntry("assets", "fpvs")!;
+const { Content } = await render(page);
 ---
 
 <Root>
@@ -47,42 +52,8 @@ const thumbnails = [
       <li>
         <article class="b-(1 gray-400) p-4 rounded-xl space-y-4 bg-white">
           <Splide slug="fpvs" {thumbnails} />
-          <div class="space-y-2">
-            <h2 class="text-2xl font-medium">
-              Novabeast - FPV Snoot & Global Collider
-            </h2>
-            <ul
-              class="ml-8 list-disc [&_a]:(underline text-blue-600 visited:text-violet-600)"
-            >
-              <li>
-                Judge where your snoot is by adding ghostly nostrils to your
-                view
-              </li>
-              <li>
-                Adjust the color via radial menu to adapt to various lighting
-                conditions
-              </li>
-              <li>
-                Use your snoot to nuzzle others' physbones via
-                <a href="https://vrcfury.com/components/global-collider/"
-                  >global collider</a
-                >
-              </li>
-              <li>
-                Install the prefab easily for
-                <a href="https://jinxxy.com/kittomatic/novabeast"
-                  >Kittomatic's Novabeast</a
-                >
-                using
-                <a href="https://vrcfury.com/">VRCFury</a>
-              </li>
-              <li>
-                Pick between
-                <a href="https://github.com/lilxyzw/lilToon">lilToon shader</a>,
-                <a href="https://www.poiyomi.com/">Poiyomi shader</a>, or
-                collider only
-              </li>
-            </ul>
+          <div class="space-y-2 richtext">
+            <Content />
           </div>
           <div class="flex flex-wrap gap-2">
             <form class="inline" method="POST" action="/dl/fpvs.unitypackage">
