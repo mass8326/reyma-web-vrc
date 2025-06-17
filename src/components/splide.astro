@@ -13,16 +13,16 @@ const { slug, thumbnails } = Astro.props;
 
 <script>
   import * as splide from "@splidejs/splide";
-  window.Splide = splide.Splide;
+  window.SplideGlobal = splide.Splide;
   declare global {
     // eslint-disable-next-line no-var
-    var Splide: typeof splide.Splide;
+    var SplideGlobal: typeof splide.Splide;
   }
 </script>
 
 <script define:vars={{ slug }}>
   document.addEventListener("DOMContentLoaded", () => {
-    const splide = new Splide(`#${slug}-splide`, {
+    const splide = new SplideGlobal(`#${slug}-splide`, {
       type: "loop",
       perPage: 1,
       autoWidth: true,

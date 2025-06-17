@@ -1,0 +1,44 @@
+---
+import { render } from "astro:content";
+import Splide from "../components/splide.astro";
+import type { CollectionEntry } from "astro:content";
+import Button from "./_button.astro";
+
+interface Props {
+  asset: CollectionEntry<"assets">;
+}
+
+const { asset } = Astro.props;
+const { Content } = await render(asset);
+---
+
+<article
+  class="flex flex-col justify-between h-full b-(1 gray-400) rounded-xl bg-white"
+>
+  <div class="p-4 space-y-4">
+    {
+      asset.data.thumbnails?.length && (
+        <Splide slug={asset.id} thumbnails={asset.data.thumbnails} />
+      )
+    }
+    <div class="space-y-2 richtext">
+      <Content />
+    </div>
+  </div>
+  <div class="flex flex-wrap gap-2 p-4 b-t-(1 neutral-400)">
+    {
+      asset.data.dl ? (
+        <>
+          <form class="inline" method="POST" action={`/dl/${asset.data.dl}`}>
+            <Button>Download (Free)</Button>
+          </form>
+          <Button tag="a" href="/tip-me">
+            Leave Me A Tip &lt;3
+          </Button>
+        </>
+      ) : (
+        <Button disabled>Coming Soon</Button>
+      )
+    }
+  </div>
+</article>

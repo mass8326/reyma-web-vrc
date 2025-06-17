@@ -1,25 +1,19 @@
 ---
 import { Image } from "astro:assets";
 import avatar from "../assets/avatar.webp";
-import thumbnail1 from "../assets/fpvs_thumbnail1.png";
-import thumbnail2 from "../assets/fpvs_thumbnail2.png";
-import thumbnail3 from "../assets/fpvs_thumbnail3.png";
 import Root from "../layouts/root.astro";
-import Button from "./_button.astro";
-import Splide from "../components/splide.astro";
-import { getEntry } from "astro:content";
-import { render } from "astro:content";
+import { getCollection } from "astro:content";
+import Asset from "./_asset.astro";
+import * as remeda from "remeda";
 
 export const prerender = true;
 
-const thumbnails = [
-  { src: thumbnail1, alt: "Global Collider For Nuzzles" },
-  { src: thumbnail2, alt: "First Person Snoot (4 Tris)" },
-  { src: thumbnail3, alt: "Drag + Drop Install" },
-];
-
-const page = await getEntry("assets", "fpvs")!;
-const { Content } = await render(page);
+const assets = await getCollection("assets").then(
+  remeda.piped(
+    remeda.filter(({ id }) => id !== "modular-novabeast"),
+    remeda.sortBy(remeda.prop("id")),
+  ),
+);
 ---
 
 <Root>
@@ -48,21 +42,14 @@ const { Content } = await render(page);
       Maserooni's
       <span class="inline-block">VRChat Assets</span>
     </h1>
-    <ul class="max-w-xl">
-      <li>
-        <article class="b-(1 gray-400) p-4 rounded-xl space-y-4 bg-white">
-          <Splide slug="fpvs" {thumbnails} />
-          <div class="space-y-2 richtext">
-            <Content />
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <form class="inline" method="POST" action="/dl/fpvs.unitypackage">
-              <Button>Download (Free)</Button>
-            </form>
-            <Button tag="a" href="/tip-me">Leave Me A Tip &lt;3</Button>
-          </div>
-        </article>
-      </li>
+    <ul class="grid gap-8 grid-auto-rows-[1fr]">
+      {
+        assets.map((asset) => (
+          <li class="max-w-xl">
+            <Asset {asset} />
+          </li>
+        ))
+      }
     </ul>
   </div>
 </Root>

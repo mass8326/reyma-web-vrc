@@ -1,3 +1,14 @@
+---
+dl: fpvs.unitypackage
+thumbnails:
+  - src: ../../assets/fpvs_thumbnail1.png
+    alt: Global Collider For Nuzzles
+  - src: ../../assets/fpvs_thumbnail2.png
+    alt: "First Person Snoot (4 Tris)"
+  - src: ../../assets/fpvs_thumbnail3.png
+    alt: "Drag + Drop Install"
+---
+
 ## Novabeast - FPV Snoot & Global Collider
 
 - Judge where your snoot is by adding ghostly nostrils to your view
