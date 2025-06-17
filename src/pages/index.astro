@@ -9,10 +9,7 @@ import * as remeda from "remeda";
 export const prerender = true;
 
 const assets = await getCollection("assets").then(
-  remeda.piped(
-    remeda.filter(({ id }) => id !== "modular-novabeast"),
-    remeda.sortBy(remeda.prop("id")),
-  ),
+  remeda.sortBy(remeda.prop("id")),
 );
 ---
 
@@ -23,7 +20,7 @@ const assets = await getCollection("assets").then(
     <Image
       class="rounded-3xl lt-sm:hidden"
       src={avatar}
-      alt="Maserooni's VRChat Avatar"
+      alt=""
       width="256"
       height="256"
       densities={[1, 1.5, 2]}
@@ -32,7 +29,7 @@ const assets = await getCollection("assets").then(
     <Image
       class="rounded-3xl sm:hidden"
       src={avatar}
-      alt="Maserooni's VRChat Avatar"
+      alt=""
       width="128"
       height="128"
       densities={[1, 1.5, 2]}
@@ -42,7 +39,7 @@ const assets = await getCollection("assets").then(
       Maserooni's
       <span class="inline-block">VRChat Assets</span>
     </h1>
-    <ul class="grid gap-8 grid-auto-rows-[1fr]">
+    <ul class="grid lg:grid-cols-2 gap-8 grid-auto-rows-[1fr]">
       {
         assets.map((asset) => (
           <li class="max-w-xl">

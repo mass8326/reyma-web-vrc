@@ -1,11 +1,11 @@
 ---
 dl: fpvs.unitypackage
 thumbnails:
-  - src: ../../assets/fpvs_thumbnail1.png
+  - src: ./thumbnail1.png
     alt: Global Collider For Nuzzles
-  - src: ../../assets/fpvs_thumbnail2.png
+  - src: ./thumbnail2.png
     alt: "First Person Snoot (4 Tris)"
-  - src: ../../assets/fpvs_thumbnail3.png
+  - src: ./thumbnail3.png
     alt: "Drag + Drop Install"
 ---
 
