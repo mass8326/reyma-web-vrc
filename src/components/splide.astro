@@ -1,14 +1,15 @@
 ---
 import "@splidejs/splide/css";
+import type { HTMLAttributes } from "astro/types";
 
 import { Image } from "astro:assets";
 
-interface Props {
+interface Props extends Omit<HTMLAttributes<"section">, "id"> {
   slug: string;
   thumbnails: { src: ImageMetadata; alt: string }[];
 }
 
-const { slug, thumbnails } = Astro.props;
+const { slug, thumbnails, ...rest } = Astro.props;
 ---
 
 <script>
@@ -20,8 +21,9 @@ const { slug, thumbnails } = Astro.props;
   }
 </script>
 
-<script define:vars={{ slug }}>
-  document.addEventListener("DOMContentLoaded", () => {
+<script define:vars={{ slug }} data-astro-rerun>
+  document.addEventListener("astro:page-load", main);
+  function main() {
     const splide = new SplideGlobal(`#${slug}-splide`, {
       type: "loop",
       perPage: 1,
@@ -39,10 +41,21 @@ const { slug, thumbnails } = Astro.props;
         }
       }
     });
-  });
+
+    document.addEventListener("astro:after-swap", cleanup);
+    function cleanup() {
+      splide.destroy();
+      document.removeEventListener("astro:page-load", main);
+      document.removeEventListener("astro:after-swap", cleanup);
+    }
+  }
 </script>
 
-<section id={`${slug}-splide`} class="splide bg-black rounded overflow-hidden">
+<section
+  {...rest}
+  id={`${slug}-splide`}
+  class="splide bg-black rounded overflow-hidden"
+>
   <div class="splide__track">
     <ul class="splide__list">
       {
@@ -54,6 +67,7 @@ const { slug, thumbnails } = Astro.props;
               width="360"
               height="360"
               densities={[1, 1.5, 2]}
+              aria-label={alt}
             />
           </li>
         ))

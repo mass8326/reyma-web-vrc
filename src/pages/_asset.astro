@@ -25,12 +25,20 @@ const { Content } = await render(asset);
       <Content />
     </div>
   </div>
-  <div class="flex flex-wrap gap-2 p-4 b-t-(1 neutral-400)">
+  <div
+    class="flex lt-xs:(flex-col items-stretch text-center) xs:flex-wrap gap-2 p-4 b-t-(1 neutral-400)"
+  >
     {
       asset.data.dl ? (
         <>
-          <form class="inline" method="POST" action={`/dl/${asset.data.dl}`}>
-            <Button>Download (Free)</Button>
+          <form
+            id={`${asset.id}-dl`}
+            class="w-full min-w-max flex-1 grow-0"
+            method="POST"
+            action={`/dl/${asset.data.dl}`}
+            data-astro-reload
+          >
+            <Button class="w-full">Download (Free)</Button>
           </form>
           <Button tag="a" href="/tip-me">
             Leave Me A Tip &lt;3

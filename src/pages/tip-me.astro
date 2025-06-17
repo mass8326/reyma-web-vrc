@@ -11,23 +11,50 @@ const { Content } = await render(page);
 ---
 
 <script>
-  import { loadStripe } from "@stripe/stripe-js";
+  import { loadStripe, type StripeEmbeddedCheckout } from "@stripe/stripe-js";
   import { actions } from "astro:actions";
   import { PUBLIC_STRIPE_KEY } from "astro:env/client";
 
-  void main();
+  declare global {
+    // eslint-disable-next-line no-var
+    var initStripe: (
+      selector: string,
+    ) => Promise<StripeEmbeddedCheckout | undefined>;
+  }
 
-  async function main() {
+  window.initStripe = async (selector: string) => {
+    const target = document.querySelector(selector) as HTMLElement;
+    if (!target) return;
+
     const stripe = await loadStripe(PUBLIC_STRIPE_KEY);
-    const checkout = await stripe?.initEmbeddedCheckout({
-      async fetchClientSecret() {
-        const result = await actions.createCheckoutSession();
-        if (result.error) throw result.error;
-        return result.data.clientSecret;
-      },
-    });
+    const checkout = await stripe?.initEmbeddedCheckout({ fetchClientSecret });
+    if (!checkout) return;
+
     document.querySelector("#spinner")?.remove();
-    checkout?.mount("#checkout");
+    checkout.mount(target);
+    return checkout;
+  };
+
+  let clientSecret: string | undefined;
+  async function fetchClientSecret() {
+    if (clientSecret) return clientSecret;
+    const result = await actions.createCheckoutSession();
+    if (result.error) throw result.error;
+    clientSecret = result.data.clientSecret;
+    return clientSecret;
+  }
+</script>
+
+<script is:inline data-astro-rerun>
+  document.addEventListener("astro:page-load", main);
+  async function main() {
+    const checkout = await window.initStripe("#checkout");
+    const cleanup = () => {
+      checkout?.destroy();
+      document.removeEventListener("astro:page-load", main);
+      document.removeEventListener("astro:after-swap", cleanup);
+    };
+    document.addEventListener("astro:after-swap", cleanup);
   }
 </script>
 
@@ -36,7 +63,7 @@ const { Content } = await render(page);
     class="flex justify-center items-start lt-md:(flex-col justify-stretch items-center) gap-4 p-4 children:max-w-md"
   >
     <div class="grow-1 w-full space-y-4">
-      <Button tag="a" href="/">Go Back</Button>
+      <Button class="inline-block" tag="a" href="/">Go Back</Button>
       <div
         id="checkout"
         class="p-4 bg-white rounded-3xl overflow-hidden min-h-2xl"

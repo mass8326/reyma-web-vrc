@@ -10,7 +10,6 @@ export default defineConfig({
   adapter: vercel(),
   integrations: [
     uno({
-      presets: [presetWind4()],
       injectReset: true,
     }),
     icon(),
