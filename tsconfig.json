@@ -1,7 +1,9 @@
 {
   "extends": "astro/tsconfigs/strictest",
   "compilerOptions": {
-    "types": ["vite-plugin-arraybuffer/types"]
+    "types": ["vite-plugin-arraybuffer/types"],
+    "baseUrl": "src",
+    "paths": { "$*": ["*"] }
   },
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist"]

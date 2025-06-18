@@ -1,0 +1,36 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+
+interface Props {
+  asset: CollectionEntry<"assets">;
+}
+
+const { asset } = Astro.props;
+const thumbnail = asset.data.thumbnails?.[0];
+---
+
+<article
+  class="flex flex-col justify-between h-full b-(1 gray-400) rounded-lg bg-white max-w-sm overflow-hidden"
+>
+  <div>
+    {
+      thumbnail && (
+        <Image
+          src={thumbnail.src}
+          alt=""
+          width="382"
+          height="382"
+          densities={[1, 1.5, 2]}
+        />
+      )
+    }
+    <div class="p-4 space-y-2">
+      <h2 class="text-3xl font-bold">{asset.data.title}</h2>
+      <p>{asset.data.desc}</p>
+    </div>
+  </div>
+  <div class="pxxy-2 b-t-(1 neutral-400) font-bold uppercase">
+    {asset.data.dl ? "Free" : "Coming Soon"}
+  </div>
+</article>

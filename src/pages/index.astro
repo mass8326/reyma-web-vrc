@@ -1,10 +1,8 @@
 ---
-import { Image } from "astro:assets";
-import avatar from "../assets/avatar.webp";
-import Root from "../layouts/root.astro";
 import { getCollection } from "astro:content";
-import Asset from "./_asset.astro";
+import AssetThumbnail from "../components/asset-thumbnail.astro";
 import * as remeda from "remeda";
+import Header from "$layouts/header.astro";
 
 export const prerender = true;
 
@@ -13,40 +11,16 @@ const assets = await getCollection("assets").then(
 );
 ---
 
-<Root>
-  <div
-    class="flex flex-col items-center justify-center gap-4 p-4 sm:(gap-6 p-8)"
-  >
-    <Image
-      class="rounded-3xl lt-sm:hidden"
-      src={avatar}
-      alt=""
-      width="256"
-      height="256"
-      densities={[1, 1.5, 2]}
-      loading="eager"
-    />
-    <Image
-      class="rounded-3xl sm:hidden"
-      src={avatar}
-      alt=""
-      width="128"
-      height="128"
-      densities={[1, 1.5, 2]}
-      loading="eager"
-    />
-    <h1 class="text-(4xl center) font-bold">
-      Maserooni's
-      <span class="inline-block">VRChat Assets</span>
-    </h1>
-    <ul class="grid lg:grid-cols-2 gap-8 grid-auto-rows-[1fr]">
-      {
-        assets.map((asset) => (
-          <li class="max-w-xl">
-            <Asset {asset} />
-          </li>
-        ))
-      }
-    </ul>
-  </div>
-</Root>
+<Header>
+  <ul class="grid gap-4 lg:(grid-cols-2 gap-8) grid-auto-rows-[1fr]">
+    {
+      assets.map((asset) => (
+        <li>
+          <a href={`/profile/mass/asset/${asset.id}`}>
+            <AssetThumbnail {asset} />
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Header>

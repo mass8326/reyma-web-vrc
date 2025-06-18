@@ -1,7 +1,7 @@
 ---
 import Root from "../layouts/root.astro";
 import { stripe } from "../lib/stripe";
-import Button from "./_button.astro";
+import Button from "../components/button.astro";
 
 const id = Astro.url.searchParams.get("session_id");
 const session = id ? await stripe.checkout.sessions.retrieve(id) : undefined;

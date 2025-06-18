@@ -15,6 +15,8 @@ const assets = defineCollection({
   }),
   schema: ({ image }) =>
     z.object({
+      title: z.string(),
+      desc: z.string().optional(),
       dl: z.string().optional(),
       thumbnails: z
         .object({ src: image(), alt: z.string() })

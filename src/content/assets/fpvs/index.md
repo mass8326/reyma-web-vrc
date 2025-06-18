@@ -1,4 +1,6 @@
 ---
+title: Novabeast - FPV Snoot & Global Collider
+desc: Add a first person view of your snoot and use it to interact with others' physbones
 dl: fpvs.unitypackage
 thumbnails:
   - src: ./thumbnail1.png
@@ -9,7 +11,7 @@ thumbnails:
     alt: "Drag + Drop Install"
 ---
 
-## Novabeast - FPV Snoot & Global Collider
+# Novabeast - FPV Snoot & Global Collider
 
 - Judge where your snoot is by adding ghostly nostrils to your view
 - Adjust the color via radial menu to adapt to various lighting conditions

@@ -1,10 +1,12 @@
 ---
+title: Modular Novabeast - VRCFury
+desc: Modular version of the Kittomatic's Novabeast using VRCFury components for easy optimization
 thumbnails:
   - src: ./thumbnail.png
     alt: Easy Optimization
 ---
 
-## Modular Novabeast - VRCFury
+# Modular Novabeast - VRCFury
 
 Modular version of the [Kittomatic's Novabeast](https://jinxxy.com/kittomatic/novabeast) using VRCFury components for easy optimization
 

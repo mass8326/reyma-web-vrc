@@ -1,0 +1,75 @@
+---
+import Splide from "./_splide.astro";
+import Header from "$layouts/header.astro";
+import { render } from "astro:content";
+import { getEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import * as remeda from "remeda";
+import Button from "$components/button.astro";
+import { Image } from "astro:assets";
+
+export const prerender = true;
+export async function getStaticPaths() {
+  return getCollection("assets").then(
+    remeda.map(({ id }) => ({ params: { id } })),
+  );
+}
+
+const asset = await getEntry("assets", Astro.params.id)!;
+const { thumbnails } = asset.data;
+---
+
+<Header mini>
+  <article
+    class="flex flex-col justify-between h-full b-(1 gray-400) rounded-lg bg-white max-w-2xl overflow-hidden"
+  >
+    {
+      thumbnails?.length &&
+        (thumbnails.length > 1 ? (
+          <Splide slug={asset.id} {thumbnails} />
+        ) : (
+          <div class="bg-black">
+            <Image
+              class="mx-auto"
+              src={thumbnails[0]!.src}
+              alt={thumbnails[0]!.alt}
+              width="420"
+              height="420"
+              densities={[1, 1.5, 2]}
+            />
+          </div>
+        ))
+    }
+    {
+      render(asset).then(({ Content }) => (
+        <div class="p-4 space-y-2 richtext">
+          <Content />
+        </div>
+      ))
+    }
+    <div
+      class="flex lt-xs:(flex-col items-stretch text-center) xs:flex-wrap gap-2 p-4 b-t-(1 neutral-400)"
+    >
+      {
+        asset.data.dl ? (
+          <>
+            <form
+              id={`${asset.id}-dl`}
+              class="w-full min-w-max flex-1 grow-0"
+              method="POST"
+              action={`/dl/${asset.data.dl}`}
+              data-astro-reload
+            >
+              <Button class="w-full">Download (Free)</Button>
+            </form>
+            <Button tag="a" href="/tip-me">
+              Leave Me A Tip &lt;3
+            </Button>
+          </>
+        ) : (
+          <Button disabled>Coming Soon</Button>
+        )
+      }
+    </div>
+  </article>
+</Header>
