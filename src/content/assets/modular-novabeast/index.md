@@ -1,12 +1,15 @@
 ---
+thumbnails:
+  - src: ./thumbnail.png
+    alt: Easy Optimization
 ---
 
 ## Modular Novabeast - VRCFury
 
-Modular version of the [Kittomatic's Novabeast](https://jinxxy.com/kittomatic/novabeast) for easy optimization
+Modular version of the [Kittomatic's Novabeast](https://jinxxy.com/kittomatic/novabeast) using VRCFury components for easy optimization
 
 - Don't want the goggles, collar, or hair? Delete the corresponding mesh and the physbones will be removed with it
-- All menus have been turned into VRCFury components! Get rid of menu items you never use by deleting the relevant object
+- Have too many options cluttering your action menu? Get rid of menu items by deleting the relevant object from the hierarchy
 - Femme and masc body meshes have been separated, saving ~1k tris
 
 Caveats:
