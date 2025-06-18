@@ -2,15 +2,7 @@
 import { Image } from "astro:assets";
 import avatar from "../assets/avatar.webp";
 import Root from "../layouts/root.astro";
-import clsx from "clsx";
 import SeoFallback from "$components/seo-fallback.astro";
-
-interface Props {
-  mini?: boolean;
-}
-
-const { mini } = Astro.props;
-const Tag = mini ? "div" : "h1";
 ---
 
 <Root>
@@ -20,33 +12,29 @@ const Tag = mini ? "div" : "h1";
   <div
     class="flex flex-col items-center justify-center gap-4 p-4 sm:(gap-6 p-8)"
   >
-    <a class="flex flex-col gap-4 items-center" href="/">
-      {
-        !mini && (
-          <Image
-            class="rounded-3xl lt-sm:hidden"
-            src={avatar}
-            alt=""
-            width="256"
-            height="256"
-            densities={[1, 1.5, 2]}
-            loading="eager"
-          />
-        )
-      }
+    <a class="flex gap-4 items-center font-bold" href="/">
       <Image
-        class={clsx("rounded-3xl", !mini && "sm:hidden")}
+        class="rounded-3xl xs:hidden"
         src={avatar}
         alt=""
-        width="128"
-        height="128"
+        width="72"
+        height="72"
         densities={[1, 1.5, 2]}
         loading="eager"
       />
-      <Tag class="text-(4xl center) font-bold">
-        Maserooni's
-        <span class="inline-block">VRChat Assets</span>
-      </Tag>
+      <Image
+        class="rounded-3xl lt-xs:hidden"
+        src={avatar}
+        alt=""
+        width="96"
+        height="96"
+        densities={[1, 1.5, 2]}
+        loading="eager"
+      />
+      <div class="text-3xl xs:text-4xl">
+        <div>Maserooni's</div>
+        <div>VRChat Assets</div>
+      </div>
     </a>
     <slot />
   </div>
