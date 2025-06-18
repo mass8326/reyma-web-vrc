@@ -1,0 +1,27 @@
+---
+import { SEO } from "astro-seo";
+import { getImage } from "astro:assets";
+import avatar from "../assets/avatar.webp";
+
+const title = "Maserooni's VRChat Assets";
+const description = "A collection of VRChat assets that I've made!";
+const thumbnail = getImage({
+  src: avatar,
+  width: 1500,
+  height: 1500,
+}).then((image) => image.src);
+---
+
+<SEO
+  {title}
+  {description}
+  openGraph={{
+    basic: {
+      title,
+      type: "website",
+      image: await thumbnail,
+    },
+    image: { width: 1500, height: 1500 },
+    optional: { description },
+  }}
+/>

@@ -7,6 +7,8 @@ import { getCollection } from "astro:content";
 import * as remeda from "remeda";
 import Button from "$components/button.astro";
 import { Image } from "astro:assets";
+import { SEO } from "astro-seo";
+import { getImage } from "astro:assets";
 
 export const prerender = true;
 export async function getStaticPaths() {
@@ -16,10 +18,39 @@ export async function getStaticPaths() {
 }
 
 const asset = await getEntry("assets", Astro.params.id)!;
-const { thumbnails } = asset.data;
+const { title, desc, thumbnails } = asset.data;
+
+function getOpenGraphThumbnail() {
+  const thumbnail = thumbnails?.[0];
+  if (!thumbnail) return;
+  return getImage({
+    src: thumbnail.src,
+    width: 1500,
+    height: 1500,
+  }).then((image) => image.src);
+}
 ---
 
 <Header mini>
+  <Fragment slot="seo">
+    <SEO
+      {title}
+      description={desc}
+      openGraph={await getOpenGraphThumbnail()?.then((image) =>
+        image
+          ? {
+              basic: {
+                title,
+                type: "website",
+                image,
+              },
+              image: { width: 1500, height: 1500 },
+              optional: { description: desc },
+            }
+          : undefined,
+      )}
+    />
+  </Fragment>
   <article
     class="flex flex-col justify-between h-full b-(1 gray-400) rounded-lg bg-white max-w-2xl overflow-hidden"
   >

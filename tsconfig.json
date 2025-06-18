@@ -3,7 +3,8 @@
   "compilerOptions": {
     "types": ["vite-plugin-arraybuffer/types"],
     "baseUrl": "src",
-    "paths": { "$*": ["*"] }
+    "paths": { "$*": ["*"] },
+    "exactOptionalPropertyTypes": false
   },
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist"]
