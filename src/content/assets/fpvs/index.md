@@ -1,7 +1,7 @@
 ---
 title: Novabeast - FPV Snoot & Global Collider
 desc: Add a first person view of your snoot and use it to interact with others' physbones
-dl: fpvs.unitypackage
+dl: fpvs-v1.0.0.unitypackage
 thumbnails:
   - src: ./thumbnail1.png
     alt: Global Collider For Nuzzles

@@ -1,7 +1,7 @@
 ---
 title: Modular Novabeast - VRCFury
-desc: Modular version of the Kittomatic's Novabeast using VRCFury components for easy optimization
-dl: modular-novabeast.unitypackage
+desc: Modular version of Kittomatic's Novabeast using VRCFury components for easy optimization
+dl: modular-novabeast-v1.0.0.unitypackage
 thumbnails:
   - src: ./thumbnail.png
     alt: Easy Optimization
