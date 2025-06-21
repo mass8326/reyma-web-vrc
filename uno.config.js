@@ -16,7 +16,7 @@ export default defineConfig({
     ["sc-link", "underline text-blue-600 visited:text-violet-600"],
     [
       "richtext",
-      "[&_a]:sc-link [&_h1]:(text-3xl font-bold) [&_h2]:(text-2xl font-bold) [&_ul]:(ml-6 list-disc)",
+      "[&_a]:sc-link [&_h1]:(text-3xl font-bold) [&_h2]:(text-2xl font-bold) [&_ul]:(pl-8 list-disc) [&_ol]:(pl-8 list-decimal)",
     ],
     [
       /^p(x+)(y+)(?:-([\d.]+))?$/,
