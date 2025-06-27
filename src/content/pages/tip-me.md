@@ -4,9 +4,11 @@ This is a custom website made by me, Maserooni! It was built using [Astro](https
 
 ## Why not use Gumroad or Jinxxy?
 
-[Third party marketplaces](https://gumroad.com/pricing) usually take a cut of every sale, including tips and donations.
+Feel free to use my [Jinxxy store page](https://jinxxy.com/mass/products) if that is more your speed!
 
-Since my assets are free and every "sale" is from your kindness and generosity, I wanted show my thanks by making sure your dollar goes as far as it can.
+Keep in mind that I have voluntarily set up my store to have a [10% platform fee](https://support.jinxxy.com/hc/en-us/articles/16736566037389) to help support their service.
+
+**If you'd like to avoid those platform fees,** this website is the place for that! By integrating directly with a payment processor, your dollar is able to go as far as it possibly can.
 
 ## Is this website secure?
 

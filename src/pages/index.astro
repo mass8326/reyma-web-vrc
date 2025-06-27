@@ -1,5 +1,7 @@
 ---
+import { Icon } from "astro-icon/components";
 import avatar from "../assets/avatar.webp";
+import jinxxy from "../assets/jinxxy.png";
 import { getCollection } from "astro:content";
 import AssetThumbnail from "../components/asset-thumbnail.astro";
 import * as remeda from "remeda";
@@ -41,6 +43,33 @@ const assets = await getCollection("assets").then(
         <span class="inline-block">VRChat Assets</span>
       </h1>
     </a>
+    <nav aria-label="External Links">
+      <ul
+        class="flex gap-2 justify-center items-center hover:[&_a]:(invert-100 transition-filter)"
+      >
+        <li>
+          <a class="" href="https://jinxxy.com/mass/products">
+            <Image
+              src={jinxxy}
+              alt="Jinxxy"
+              width="36"
+              height="36"
+              densities={[1, 1.5, 2]}
+              loading="eager"
+            />
+          </a>
+        </li>
+        <li>
+          <a href="mailto:mass@reyma.dev">
+            <Icon
+              class="p-1 text-(4xl white) bg-black rounded-full"
+              name="mdi:email"
+              title="Email"
+            />
+          </a>
+        </li>
+      </ul>
+    </nav>
     <ul class="grid gap-4 lg:(grid-cols-2 gap-8) grid-auto-rows-[1fr]">
       {
         assets.map((asset) => (
