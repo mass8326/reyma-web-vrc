@@ -1,6 +1,7 @@
 ---
 import { ClientRouter } from "astro:transitions";
 import SeoFallback from "$components/seo-fallback.astro";
+import Analytics from "@vercel/analytics/astro";
 ---
 
 <!doctype html>
@@ -13,6 +14,7 @@ import SeoFallback from "$components/seo-fallback.astro";
     <slot name="seo">
       <SeoFallback />
     </slot>
+    <Analytics />
     <slot name="head" />
   </head>
   <body class="bg-gray-200">
