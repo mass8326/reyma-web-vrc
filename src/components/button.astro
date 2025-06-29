@@ -12,7 +12,8 @@ const { tag: Tag = "button", ...props } = Astro.props;
 <Tag
   {...props}
   class={clsx(
-    "pxxy-2 bg-blue-700 rounded text-white font-medium",
+    "pxxy-2 bg-blue-700 rounded text-white font-medium outline-(2 solid transparent)",
+    "hover:(outline-black bg-blue-800) transition-all",
     "disabled:(bg-gray-700 cursor-not-allowed)",
     props.class,
   )}

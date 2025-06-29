@@ -10,8 +10,10 @@ const { asset } = Astro.props;
 const thumbnail = asset.data.thumbnails?.[0];
 ---
 
-<article
-  class="flex flex-col justify-between h-full b-(1 gray-400) rounded-lg bg-white max-w-sm overflow-hidden"
+<a
+  class="flex flex-col justify-between h-full rounded-lg bg-white max-w-sm overflow-hidden
+    b-(1 gray-400) outline-(4 transparent solid) hover:(b-black outline-black) transition-all"
+  href={`/profile/mass/asset/${asset.id}`}
 >
   <div>
     {
@@ -33,4 +35,4 @@ const thumbnail = asset.data.thumbnails?.[0];
   <div class="pxxy-2 b-t-(1 neutral-400) font-bold uppercase">
     {asset.data.dl ? "Free" : "Coming Soon"}
   </div>
-</article>
+</a>
