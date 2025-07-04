@@ -14,6 +14,7 @@ export default defineConfig({
   }),
   shortcuts: [
     ["sc-link", "underline text-blue-600 visited:text-violet-600"],
+    ["flex-center-center", "flex justify-center items-center"],
     [
       "richtext",
       "[&_a]:sc-link [&_h1]:(text-3xl font-bold) [&_h2]:(text-2xl font-bold) [&_ul]:(pl-8 list-disc) [&_ol]:(pl-8 list-decimal)",
