@@ -5,10 +5,10 @@ import { render } from "astro:content";
 import { getEntry } from "astro:content";
 import { getCollection } from "astro:content";
 import * as remeda from "remeda";
-import Button from "$components/button.astro";
 import { Image } from "astro:assets";
 import { SEO } from "astro-seo";
 import { getImage } from "astro:assets";
+import Dl from "./_dl.astro";
 
 export const prerender = true;
 export async function getStaticPaths() {
@@ -63,7 +63,7 @@ function getOpenGraphThumbnail() {
             <Image
               class="mx-auto"
               src={thumbnails[0]!.src}
-              alt={thumbnails[0]!.alt}
+              alt={thumbnails[0]!.alt ?? ""}
               width="420"
               height="420"
               densities={[1, 1.5, 2]}
@@ -78,29 +78,6 @@ function getOpenGraphThumbnail() {
         </div>
       ))
     }
-    <div
-      class="flex lt-xs:(flex-col items-stretch text-center) xs:flex-wrap gap-2 p-4 b-t-(1 neutral-400)"
-    >
-      {
-        asset.data.dl ? (
-          <>
-            <form
-              id={`${asset.id}-dl`}
-              class="w-full min-w-max flex-1 grow-0"
-              method="POST"
-              action={`/dl/${asset.data.dl}`}
-              data-astro-reload
-            >
-              <Button class="w-full">Download (Free)</Button>
-            </form>
-            <Button tag="a" href="/tip-me">
-              Leave Me A Tip &lt;3
-            </Button>
-          </>
-        ) : (
-          <Button disabled>Coming Soon</Button>
-        )
-      }
-    </div>
+    <Dl asset={asset} />
   </article>
 </Header>

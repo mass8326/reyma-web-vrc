@@ -19,7 +19,7 @@ const assets = defineCollection({
       desc: z.string().optional(),
       dl: z.string().optional(),
       thumbnails: z
-        .object({ src: image(), alt: z.string() })
+        .object({ src: image(), alt: z.string().optional() })
         .array()
         .optional(),
     }),

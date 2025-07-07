@@ -1,0 +1,62 @@
+---
+import Button from "$components/button.astro";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  asset: CollectionEntry<"assets">;
+}
+
+const {
+  id,
+  data: { dl },
+} = Astro.props.asset;
+const github = dl != null && isGithubUrl(dl);
+
+function isGithubUrl(input: string): URL | false {
+  try {
+    const url = new URL(input);
+    return url.host === "github.com" ? url : false;
+  } catch {
+    return false;
+  }
+}
+---
+
+<div
+  class="flex lt-xs:(flex-col items-stretch text-center) xs:flex-wrap gap-2 p-4 b-t-(1 neutral-400)"
+>
+  {
+    dl ? (
+      <>
+        {github ? (
+          <>
+            <Button
+              tag="a"
+              href={new URL(github.pathname + "/releases", github)}
+            >
+              Open Downloads Page
+            </Button>
+            <Button tag="a" href={github}>
+              View Source Code
+            </Button>
+          </>
+        ) : (
+          <form
+            id={`${id}-dl`}
+            class="w-full min-w-max flex-1 grow-0"
+            method="POST"
+            action={`/dl/${dl}`}
+            data-astro-reload
+          >
+            <Button class="w-full">Download (Free)</Button>
+          </form>
+        )}
+        <Button tag="a" href="/tip-me">
+          Leave Me A Tip &lt;3
+        </Button>
+      </>
+    ) : (
+      <Button disabled>Coming Soon</Button>
+    )
+  }
+</div>
